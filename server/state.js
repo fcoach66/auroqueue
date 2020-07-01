@@ -1,5 +1,7 @@
 var EventEmitter = require('events').EventEmitter;
 
+var player = require('play-sound')(opts = {})
+
 const printer = require('node-native-printer');
 
 /**
@@ -43,6 +45,10 @@ var stateApi = {
      */
     advanceToken(desk) {
         desk = desk || 1; //if no desk passed advance table 1
+        
+        player.play('/opt/auroqueue/Doorbell.mp3', function(err){
+            if (err) throw err
+          })
         
         state.lastCalledToken = this.getIncremental(state.lastCalledToken);
 
