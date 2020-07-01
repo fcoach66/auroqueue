@@ -1,5 +1,7 @@
 var EventEmitter = require('events').EventEmitter;
 
+const printer = require('node-native-printer');
+
 /**
  * Server state
  *  
@@ -58,7 +60,7 @@ var stateApi = {
      */
     getNewToken() {
         state.lastGivenToken = this.getIncremental(state.lastGivenToken);
-
+        printer.printText(state.lastGivenToken)
         return state.lastGivenToken;
     },
 
