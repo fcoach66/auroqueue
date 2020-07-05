@@ -2,7 +2,7 @@ var EventEmitter = require('events').EventEmitter;
 
 var player = require('play-sound')(opts = {})
 
-const printer = require('node-native-printer');
+var printer = require("../node_modules/printer/lib");
 
 /**
  * Server state
@@ -66,7 +66,16 @@ var stateApi = {
      */
     getNewToken() {
         state.lastGivenToken = this.getIncremental(state.lastGivenToken);
-        printer.printText(state.lastGivenToken)
+        
+        printer.printDirect({data:String(state.lastGivenToken) // or simple String: "some text"
+                //, printer:'Foxit Reader PDF Printer' // printer name, if missing then will print to default printer
+                , type: 'RAW' // type: RAW, TEXT, PDF, JPEG, .. depends on platform
+                , success:function(jobID){
+                        console.log("sent to printer with ID: "+jobID);
+                }
+                , error:function(err){console.log(err);}
+        });
+
         return state.lastGivenToken;
     },
 
