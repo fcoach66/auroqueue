@@ -20,7 +20,7 @@ while (true); do
 	   then
 	    # if the button has been pressed, send an HTTP request
 	    # to the software
-	    curl http://localhost/api/token # debounce the button
+	    curl http://localhost:8000/api/token # debounce the button
 	    sleep 1
 	fi
 done
